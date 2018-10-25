@@ -11,6 +11,19 @@ public class CrashController {
     @Autowired
     Leaker leaker;
 
+    @RequestMapping("/")
+    @ResponseBody
+    public String home() {
+        // this is a horrible way to server html
+        String html = "<html>" + //
+            "<a href='leak'>Fast leak</a><br/>" + //
+            "<a href='actuator'>Actuators list</a><br/>" + //
+            "<a href='die'>Kill the application</a><br/>" + //
+            "</html>";
+
+        return html;
+    }
+
     @RequestMapping("/leak")
     @ResponseBody
     public String leak() {
