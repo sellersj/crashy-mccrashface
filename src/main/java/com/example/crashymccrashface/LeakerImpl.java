@@ -3,10 +3,14 @@ package com.example.crashymccrashface;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LeakerImpl implements Leaker {
+
+    private Logger logger = LoggerFactory.getLogger(LeakerImpl.class);
 
     private final List<byte[]> memoryLeak = new ArrayList<>();
 
