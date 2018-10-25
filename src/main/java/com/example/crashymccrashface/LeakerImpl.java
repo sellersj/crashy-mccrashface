@@ -12,12 +12,12 @@ public class LeakerImpl implements Leaker {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.example.crashymccrashface.Leaker#leakMemory()
      */
     @Override
     public void leakMemory() {
-        leak(100);
+        leak(1000);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class LeakerImpl implements Leaker {
             // TODO figure out how to use the VM args ExitOnOutOfMemoryError
 
             try {
-                memoryLeak.add(new byte[1024 * 1014]);
+                memoryLeak.add(new byte[1024]);
             } catch (OutOfMemoryError e) {
                 System.out.println("Killing self due to OOM");
                 System.exit(1);
