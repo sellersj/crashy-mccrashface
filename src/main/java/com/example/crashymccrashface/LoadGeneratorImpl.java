@@ -9,6 +9,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
@@ -16,6 +18,8 @@ import org.springframework.util.StopWatch;
 /** The whole idea of this class is to just introduce cpu load. */
 @Component
 public class LoadGeneratorImpl implements LoadGenerator, InitializingBean {
+
+    private Logger logger = LoggerFactory.getLogger(LoadGeneratorImpl.class);
 
     /** For generating random bytes. */
     private Random random = new Random();
@@ -55,6 +59,6 @@ public class LoadGeneratorImpl implements LoadGenerator, InitializingBean {
             throw new RuntimeException(e);
         }
         watch.stop();
-        System.out.println("Load of " + numberOfLoops + " of loops took " + watch.getTotalTimeSeconds());
+        logger.info("Load of " + numberOfLoops + " of loops took " + watch.getTotalTimeSeconds());
     }
 }

@@ -30,7 +30,6 @@ public class LeakerImpl implements Leaker {
     }
 
     private void leak(int loopSize) {
-        System.out.println("Before memory: " + getMemory());
         for (int i = 0; i < loopSize; i++) {
 
             // TODO figure out how to use the VM args ExitOnOutOfMemoryError
@@ -38,11 +37,11 @@ public class LeakerImpl implements Leaker {
             try {
                 memoryLeak.add(new byte[1024]);
             } catch (OutOfMemoryError e) {
-                System.out.println("Killing self due to OOM");
+                logger.info("Killing self due to OOM");
                 System.exit(1);
             }
         }
-        System.out.println("After memory : " + getMemory());
+        logger.info("After memory : " + getMemory());
     }
 
     private long getMemory() {
