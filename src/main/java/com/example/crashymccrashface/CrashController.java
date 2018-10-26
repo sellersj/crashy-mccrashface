@@ -32,7 +32,7 @@ public class CrashController {
             "<a href='sleep?s=15'>Sleep the thread for 15 second</a><br/>" + //
             "<a href='actuator'>Actuators list</a><br/>" + //
             "<a href='exception'>Throws an error</a><br/>" + //
-            "<p><form action='/' method='post'><input type='submit'></form><p>" + //
+            "<p><form action='/' method='post'><input type='submit' value='Post to context root'></form><p>" + //
             //
             "<br/><a href='die'>Kill the application</a><br/>" + //
             // these are so if someone hits the main page it will generate these stats
