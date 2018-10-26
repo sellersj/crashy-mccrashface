@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
+@ConditionalOnProperty(prefix = "com.example.crashymccrashface", name = "schedules", havingValue = "true", matchIfMissing = true)
 public class Schedules {
 
     @Autowired
@@ -15,13 +16,11 @@ public class Schedules {
     private LoadGenerator loadGenerator;
 
     @Scheduled(fixedRate = 5000, initialDelay = 5000)
-    @ConditionalOnProperty(prefix = "com.example.crashymccrashface.schedule", name = "memleak", havingValue = "true", matchIfMissing = true)
     public void sloooowLeak() {
         leaker.slowLeak();
     }
 
     @Scheduled(fixedRate = 5000, initialDelay = 15000)
-    @ConditionalOnProperty(prefix = "com.example.crashymccrashface.schedule", name = "cpuLoad", havingValue = "true", matchIfMissing = true)
     public void cpuLoad() {
         loadGenerator.generateLoad();
     }
