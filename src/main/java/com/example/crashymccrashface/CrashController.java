@@ -29,6 +29,7 @@ public class CrashController {
         String html = "<html>" + //
             "<a href='leak'>Fast leak</a><br/>" + //
             "<a href='load?s=1'>Generate a load for 1 second</a><br/>" + //
+            "<a href='sleep?s=15'>Sleep the thread for 15 second</a><br/>" + //
             "<a href='actuator'>Actuators list</a><br/>" + //
             "<a href='die'>Kill the application</a><br/>" + //
             "</html>";
@@ -55,6 +56,23 @@ public class CrashController {
 
         loadGenerator.generateLoad(seconds * 1000);
         return String.format("Increasing cpu load for %s seconds.", seconds);
+    }
+
+    @RequestMapping("/sleep")
+    @ResponseBody
+    public String sleep(@RequestParam(value = "s", required = false) int seconds) {
+        int max = 30;
+        if (seconds > max) {
+            return "Requests can only sleep for a max of " + max + " seconds. Not sleeping.";
+        }
+
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (InterruptedException e) {
+            logger.error("Could not sleep thread", e);
+        }
+
+        return String.format("Done sleeping request for %s seconds.", seconds);
     }
 
     @RequestMapping("/die")
