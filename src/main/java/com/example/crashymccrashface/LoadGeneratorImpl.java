@@ -1,12 +1,9 @@
 package com.example.crashymccrashface;
 
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
 import org.slf4j.Logger;
@@ -19,46 +16,60 @@ import org.springframework.util.StopWatch;
 @Component
 public class LoadGeneratorImpl implements LoadGenerator, InitializingBean {
 
-    private Logger logger = LoggerFactory.getLogger(LoadGeneratorImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(LoadGeneratorImpl.class);
 
     /** For generating random bytes. */
-    private Random random = new Random();
+    private final Random random = new Random();
 
-    /** The secret key. */
-    private SecretKey aesKey;
+    /** The cipher to use to generate load. */
+    private Cipher cipher;
 
     @Override
     public void afterPropertiesSet() throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
         kgen.init(128);
-        aesKey = kgen.generateKey();
+        SecretKey aesKey = kgen.generateKey();
+
+        cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, aesKey);
     }
 
     @Override
     public void generateLoad() {
-        int loopCount = random.nextInt(500) + 500;
+        int loopCount = random.nextInt(3000) + 200;
         generateLoad(loopCount);
     }
 
     @Override
-    public void generateLoad(int numberOfLoops) {
+    public void generateLoad(long numberOfMilliseonds) {
+        Thread myThread = new Thread(new LoadForGivenTime(numberOfMilliseonds), "threadFor" + numberOfMilliseonds);
+        myThread.start();
+    }
 
-        StopWatch watch = new StopWatch();
-        watch.start();
-        try {
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+    /**
+     * Runs a thread at calculation at least once.
+     */
+    class LoadForGivenTime implements Runnable {
 
-            for (int i = 0; i < numberOfLoops; i++) {
+        private final long timeToStop;
+
+        public LoadForGivenTime(long numberOfMilliseonds) {
+            timeToStop = System.currentTimeMillis() + numberOfMilliseonds;
+        }
+
+        @Override
+        public void run() {
+            StopWatch watch = new StopWatch();
+            watch.start();
+            do {
                 byte[] array = new byte[Integer.MAX_VALUE / 12000];
                 random.nextBytes(array);
                 cipher.update(array);
-            }
+            } while (System.currentTimeMillis() < timeToStop);
 
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException e) {
-            throw new RuntimeException(e);
+            watch.stop();
+            // not sure why, but this doesn't log in the test case
+            logger.info("Finished running a load for " + watch.getTotalTimeSeconds());
         }
-        watch.stop();
-        logger.info("Load of " + numberOfLoops + " of loops took " + watch.getTotalTimeSeconds());
     }
 }

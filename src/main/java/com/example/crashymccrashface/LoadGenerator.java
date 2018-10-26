@@ -4,6 +4,6 @@ public interface LoadGenerator {
 
     void generateLoad();
 
-    void generateLoad(int numberOfLoops);
+    void generateLoad(long numberOfMilliseonds);
 
 }
