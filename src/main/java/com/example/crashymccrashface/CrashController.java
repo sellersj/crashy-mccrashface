@@ -31,7 +31,10 @@ public class CrashController {
             "<a href='load?s=1'>Generate a load for 1 second</a><br/>" + //
             "<a href='sleep?s=15'>Sleep the thread for 15 second</a><br/>" + //
             "<a href='actuator'>Actuators list</a><br/>" + //
-            "<a href='die'>Kill the application</a><br/>" + //
+            "<a href='this-does-not-exist'>This will give a 404 not found</a><br/>" + //
+            "<a href='exception'>Throws an error</a><br/>" + //
+            //
+            "<br/><a href='die'>Kill the application</a><br/>" + //
             "</html>";
 
         return html;
@@ -73,6 +76,11 @@ public class CrashController {
         }
 
         return String.format("Done sleeping request for %s seconds.", seconds);
+    }
+
+    @RequestMapping("/exception")
+    public void ohGreatWhatHaveWeHereAnExceptionalCase() {
+        throw new RuntimeException("Thrown on purpose as a test from the controller");
     }
 
     @RequestMapping("/die")
