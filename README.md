@@ -10,4 +10,3 @@ You can filter to a given url like
 http://localhost:8080/actuator/metrics/http.server.requests?tag=uri:/load
 You can also filter to a given status code like
 http://localhost:8080/actuator/metrics/http.server.requests?tag=status:404
-
