@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class LeakerImpl implements Leaker {
 
+    private static final int DEFAULT_MEM_LEAK_STEP = 1024;
+
     private final Logger logger = LoggerFactory.getLogger(LeakerImpl.class);
 
     private final List<byte[]> memoryLeak = new ArrayList<>();
@@ -21,22 +23,22 @@ public class LeakerImpl implements Leaker {
      */
     @Override
     public void leakMemory() {
-        leak(1000, -1);
+        leak(1000, -1, DEFAULT_MEM_LEAK_STEP);
     }
 
     @Override
     public void slowLeak() {
-        leak(1, -1);
+        leak(1, -1, DEFAULT_MEM_LEAK_STEP);
     }
 
     @Override
     public void hemorrhage() {
-        // delay 60 seconds so that the steps of memory will show up in metric tools
-        leak(1000, 60);
+        // delay 15 seconds so that the steps of memory will show up in metric tools
+        leak(Integer.MAX_VALUE, 15, DEFAULT_MEM_LEAK_STEP * DEFAULT_MEM_LEAK_STEP);
     }
 
-    private void leak(int loopSize, int delay) {
-        Thread myThread = new Thread(new LeakThread(loopSize, delay), "memoryLeak");
+    private void leak(int loopSize, int delay, int memStep) {
+        Thread myThread = new Thread(new LeakThread(loopSize, delay, memStep), "memoryLeak");
         myThread.start();
     }
 
@@ -46,9 +48,12 @@ public class LeakerImpl implements Leaker {
 
         private final int delay;
 
-        public LeakThread(int loopSize, int delay) {
+        private final int memLeakStep;
+
+        public LeakThread(int loopSize, int delay, int leakStep) {
             this.loopSize = loopSize;
             this.delay = delay;
+            this.memLeakStep = leakStep;
         }
 
         @Override
@@ -58,7 +63,7 @@ public class LeakerImpl implements Leaker {
 
                 // TODO figure out how to use the VM args ExitOnOutOfMemoryError
                 try {
-                    memoryLeak.add(new byte[1024]);
+                    memoryLeak.add(new byte[memLeakStep]);
 
                     if (delay > 0) {
                         try {
