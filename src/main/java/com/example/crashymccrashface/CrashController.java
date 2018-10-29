@@ -34,6 +34,7 @@ public class CrashController {
             "<a href='exception'>Throws an error</a><br/>" + //
             "<p><form action='/' method='post'><input type='submit' value='Post to context root'></form><p>" + //
             //
+            "<br/><a href='hemorrhage'>Scheduled task that will leak until crashes</a><br/>" + //
             "<br/><a href='die'>Kill the application</a><br/>" + //
             // these are so if someone hits the main page it will generate these stats
             "<img src='this-image-does-not-exist.gif' alt='this generates a 404' height='1' width='1'>" + //
@@ -51,6 +52,13 @@ public class CrashController {
 
         return String.format("I'm not dead yet!\nMemory left: %s of %s", Runtime.getRuntime().freeMemory(),
             Runtime.getRuntime().totalMemory());
+    }
+
+    @RequestMapping("/hemorrhage")
+    @ResponseBody
+    public String hemorrhage() {
+        leaker.hemorrhage();
+        return "This will leak every minute until the app crashes. Goodbye.";
     }
 
     @RequestMapping("/load")
