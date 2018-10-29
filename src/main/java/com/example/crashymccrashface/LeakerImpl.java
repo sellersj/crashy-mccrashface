@@ -36,26 +36,44 @@ public class LeakerImpl implements Leaker {
     }
 
     private void leak(int loopSize, int delay) {
-        for (int i = 0; i < loopSize; i++) {
+        Thread myThread = new Thread(new LeakThread(loopSize, delay), "memoryLeak");
+        myThread.start();
+    }
 
-            // TODO figure out how to use the VM args ExitOnOutOfMemoryError
+    class LeakThread implements Runnable {
 
-            try {
-                memoryLeak.add(new byte[1024]);
+        private final int loopSize;
 
-                if (delay > 0) {
-                    try {
-                        Thread.sleep(1000 * delay);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException("Could not sleep the thread", e);
-                    }
-                }
-            } catch (OutOfMemoryError e) {
-                logger.info("Killing self due to OOM");
-                System.exit(1);
-            }
+        private final int delay;
+
+        public LeakThread(int loopSize, int delay) {
+            this.loopSize = loopSize;
+            this.delay = delay;
         }
-        logger.info("After memory : " + getMemory());
+
+        @Override
+        public void run() {
+
+            for (int i = 0; i < loopSize; i++) {
+
+                // TODO figure out how to use the VM args ExitOnOutOfMemoryError
+                try {
+                    memoryLeak.add(new byte[1024]);
+
+                    if (delay > 0) {
+                        try {
+                            Thread.sleep(1000 * delay);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException("Could not sleep the thread", e);
+                        }
+                    }
+                } catch (OutOfMemoryError e) {
+                    logger.info("Killing self due to OOM");
+                    System.exit(1);
+                }
+            }
+            logger.info("After memory : " + getMemory());
+        }
     }
 
     private long getMemory() {
