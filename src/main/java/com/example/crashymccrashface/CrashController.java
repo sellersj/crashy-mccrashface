@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,7 +23,7 @@ public class CrashController {
     /** Max time we will run a cpu load. */
     private static final int MAX_LOAD_TIME_SECONDS = 6 * 60;
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public String home() {
         // this is a horrible way to serve html. I'm doing it anyways.
@@ -43,6 +44,11 @@ public class CrashController {
             "</html>";
 
         return html;
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String homeAsAPost() {
+        return "redirect:/";
     }
 
     @RequestMapping("/leak")
