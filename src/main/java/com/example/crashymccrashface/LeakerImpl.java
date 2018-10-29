@@ -33,8 +33,8 @@ public class LeakerImpl implements Leaker {
 
     @Override
     public void hemorrhage() {
-        // chew up half of the free memory per step
-        Long memStep = Long.valueOf(Runtime.getRuntime().freeMemory() / 2);
+        // chew up a big chunk of the free memory per step
+        Long memStep = Long.valueOf(Runtime.getRuntime().freeMemory() / 8);
 
         // delay 15 seconds so that the steps of memory will show up in metric tools
         leak(Integer.MAX_VALUE, 15, memStep.intValue());
