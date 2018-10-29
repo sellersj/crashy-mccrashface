@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LeakerImpl implements Leaker {
 
-    private Logger logger = LoggerFactory.getLogger(LeakerImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(LeakerImpl.class);
 
     private final List<byte[]> memoryLeak = new ArrayList<>();
 
@@ -21,21 +21,35 @@ public class LeakerImpl implements Leaker {
      */
     @Override
     public void leakMemory() {
-        leak(1000);
+        leak(1000, -1);
     }
 
     @Override
     public void slowLeak() {
-        leak(1);
+        leak(1, -1);
     }
 
-    private void leak(int loopSize) {
+    @Override
+    public void hemorrhage() {
+        // delay 60 seconds so that the steps of memory will show up in metric tools
+        leak(1000, 60);
+    }
+
+    private void leak(int loopSize, int delay) {
         for (int i = 0; i < loopSize; i++) {
 
             // TODO figure out how to use the VM args ExitOnOutOfMemoryError
 
             try {
                 memoryLeak.add(new byte[1024]);
+
+                if (delay > 0) {
+                    try {
+                        Thread.sleep(1000 * delay);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException("Could not sleep the thread", e);
+                    }
+                }
             } catch (OutOfMemoryError e) {
                 logger.info("Killing self due to OOM");
                 System.exit(1);
