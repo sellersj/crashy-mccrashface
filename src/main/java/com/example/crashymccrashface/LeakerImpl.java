@@ -80,11 +80,11 @@ public class LeakerImpl implements Leaker {
                     System.exit(1);
                 }
             }
-            logger.info("After memory : " + getMemory());
+            logger.info("Used memory after mem leak task : " + getCurrentUsedMemory());
         }
     }
 
-    private long getMemory() {
+    private long getCurrentUsedMemory() {
         return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
     }
 
