@@ -62,8 +62,6 @@ public class LeakerImpl implements Leaker {
         @Override
         public void run() {
 
-            System.out.println("We are about to start the loop : " + getMemory());
-
             for (int i = 0; i < loopSize; i++) {
 
                 // TODO figure out how to use the VM args ExitOnOutOfMemoryError
