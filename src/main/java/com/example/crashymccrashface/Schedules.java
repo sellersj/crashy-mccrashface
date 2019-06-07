@@ -19,6 +19,9 @@ public class Schedules {
     @Autowired
     private LoadGenerator loadGenerator;
 
+    @Autowired
+    private LogGenerator logGenerator;
+
     @Scheduled(fixedRate = 5000, initialDelay = 5000)
     public void sloooowLeak() {
         leaker.slowLeak();
@@ -34,6 +37,14 @@ public class Schedules {
     @Scheduled(fixedRate = 5000, initialDelay = 15000)
     public void cpuLoad() {
         loadGenerator.generateLoad();
+    }
+
+    /**
+     * Run every 7 minutes, initial delay of 30 seconds.
+     */
+    @Scheduled(fixedRate = 7 * 60 * 1000, initialDelay = 30 * 1000)
+    public void generateLogMessages() {
+        logGenerator.generateLogs();
     }
 
 }
