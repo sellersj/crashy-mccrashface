@@ -28,7 +28,7 @@ public class LogGeneratorImpl implements LogGenerator {
 
             String message = String.format("This is a log spike message [%s / %s]", i, numberOfMessages);
 
-            if (0 == i % 2) {
+            if (random.nextBoolean()) {
                 logger.warn(message);
             } else {
                 logger.error(message);
