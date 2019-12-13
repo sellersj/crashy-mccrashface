@@ -51,6 +51,18 @@
   </dependencies>
 
   <build>
+    <pluginManagement>
+      <plugins>
+        <!-- TODO remove this at a later time -->
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <!-- there's a bug with eclipse and 3.1.2 -->
+          <!-- https://stackoverflow.com/a/56218087/2055199 -->
+          <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=547340 -->
+          <version>3.1.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
