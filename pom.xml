@@ -82,4 +82,56 @@
     </plugins>
   </build>
 
+  <profiles>
+    <profile>
+      <id>jib-build-container</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+            <version>2.8.0</version>
+            <configuration>
+              <to>
+                <image>docker.io/sellersj/${project.artifactId}:${project.version}</image>
+              </to>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <!-- this is to try out the native build image -->
+    <profile>
+      <id>boot-native-image</id>
+      <dependencies>
+        <!-- forcing a newer version. Will need to revisit when updating the version of spring boot -->
+        <dependency>
+          <groupId>org.springframework.experimental</groupId>
+          <artifactId>spring-graalvm-native</artifactId>
+          <version>0.8.5</version>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+              <image>
+                <builder>paketobuildpacks/builder:tiny</builder>
+                <env>
+                  <BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE>
+                  <!-- I wasn't able to use env variables to get this to work. The plugin doesn't seem to be using the maven 
+                    fixed ones if you use ${env.https_proxy} -->
+                  <BPL_HTTPS_PROXY>http://example.com</BPL_HTTPS_PROXY>
+                  <HTTPS_PROXY>http://example.com</HTTPS_PROXY>
+                </env>
+              </image>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>
