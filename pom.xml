@@ -120,7 +120,7 @@
               <image>
                 <builder>paketobuildpacks/builder:tiny</builder>
                 <env>
-                  <BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE>
+                  <!-- <BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE> -->
                   <!-- I wasn't able to use env variables to get this to work. The plugin doesn't seem to be using the maven 
                     fixed ones if you use ${env.https_proxy} -->
                   <BPL_HTTPS_PROXY>http://example.com</BPL_HTTPS_PROXY>
