@@ -74,6 +74,14 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <image>
+            <env>
+              <!-- TODO move this into a profile and detect if we need to set it based on if the var exists -->
+              <!-- <https_proxy>${env.HTTP_PROXY}</https_proxy> -->
+            </env>
+          </image>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>pl.project13.maven</groupId>
@@ -118,9 +126,9 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
             <configuration>
               <image>
-                <builder>paketobuildpacks/builder:tiny</builder>
+                <!-- <builder>paketobuildpacks/builder:tiny</builder> -->
                 <env>
-                  <!-- <BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE> -->
+                  <BP_BOOT_NATIVE_IMAGE>1</BP_BOOT_NATIVE_IMAGE>
                   <!-- I wasn't able to use env variables to get this to work. The plugin doesn't seem to be using the maven 
                     fixed ones if you use ${env.https_proxy} -->
                   <BPL_HTTPS_PROXY>http://example.com</BPL_HTTPS_PROXY>
