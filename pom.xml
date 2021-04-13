@@ -115,8 +115,8 @@
         <!-- forcing a newer version. Will need to revisit when updating the version of spring boot -->
         <dependency>
           <groupId>org.springframework.experimental</groupId>
-          <artifactId>spring-graalvm-native</artifactId>
-          <version>0.8.5</version>
+          <artifactId>spring-native</artifactId>
+          <version>0.9.1</version>
         </dependency>
       </dependencies>
       <build>
