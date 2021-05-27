@@ -11,3 +11,6 @@ http://localhost:8080/actuator/metrics/http.server.requests?tag=uri:/load
 
 You can also filter to a given status code like
 http://localhost:8080/actuator/metrics/http.server.requests?tag=status:404
+
+Note: building container images with spring boot or the native image needs a newer OS than redhat 7
+See https://github.com/buildpacks/pack/issues/439 for similar issues.
