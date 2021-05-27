@@ -163,6 +163,33 @@
         </plugins>
       </build>
     </profile>
+    <!-- when running this behind a proxy, we have to manually set the proxy info -->
+    <profile>
+      <id>boot-image-with-proxy</id>
+      <activation>
+        <property>
+          <name>env.HTTPS_PROXY</name>
+        </property>
+      </activation>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-maven-plugin</artifactId>
+              <configuration>
+                <image>
+                  <env>
+                    <HTTP_PROXY>http://example.com</HTTP_PROXY>
+                    <HTTPS_PROXY>http://example.com</HTTPS_PROXY>
+                  </env>
+                </image>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
   </profiles>
 
 </project>
