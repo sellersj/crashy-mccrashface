@@ -168,7 +168,7 @@
       <id>boot-image-with-proxy</id>
       <activation>
         <property>
-          <name>env.HTTPS_PROXY</name>
+          <name>env.https_proxy</name>
         </property>
       </activation>
       <build>
