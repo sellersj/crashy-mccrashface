@@ -54,7 +54,7 @@ public class LoadGeneratorImpl implements LoadGenerator {
                 kgen.init(128);
                 SecretKey aesKey = kgen.generateKey();
 
-                Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+                Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
                 cipher.init(Cipher.ENCRYPT_MODE, aesKey);
 
                 StopWatch watch = new StopWatch();
