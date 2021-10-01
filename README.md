@@ -2,6 +2,15 @@
 
 A simple app that will use up resources and eventually crash.
 
+The purpose is to demo the ability of the platform
+* to restart when the application crashes
+* horizontal scaling
+* gather and graph data such as
+    * memory usage
+    * cpu usage
+    * log collection
+    * http requests
+
 ## Seeing webstats
 The property `management.metrics.web.server.auto-time-requests` is enabled, so if you hit some pages, then if
 you go to a url like http://localhost:8080/actuator/metrics/http.server.requests you can
