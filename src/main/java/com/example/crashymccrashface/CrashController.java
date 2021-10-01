@@ -30,7 +30,9 @@ public class CrashController {
     @ResponseBody
     public String home() {
         // this is a horrible way to serve html. I'm doing it anyways.
-        String html = "<html>" + //
+        String html = "<!DOCTYPE html>\n<html lang='en'>\n" + //
+            "<head><title>Crashy McCrashface</title></head>\n<body>\n" + //
+            "<h1>Test app which creates interesting trackable stats</h1>" + //
             "<a href='leak'>Fast leak</a><br/>" + //
             "<a href='load?s=1'>Generate a load for 1 second</a><br/>" + //
             "<a href='sleep?s=15'>Sleep the thread for 15 second</a><br/>" + //
@@ -42,10 +44,10 @@ public class CrashController {
             "<br/><a href='hemorrhage'>Scheduled task that will leak until crashes</a><br/>" + //
             "<br/><a href='die'>Kill the application</a><br/>" + //
             // these are so if someone hits the main page it will generate these stats
-            "<img src='this-image-does-not-exist.gif' alt='this generates a 404' height='1' width='1'>" + //
-            "<img src='exception?text=from-image-tag' alt='this generates an exception' height='1' width='1'>" + //
-            "<img src='sleep?s=1' alt='sleep baby sleep' height='1' width='1'>" + //
-            "</html>";
+            "<img src='this-image-does-not-exist.gif' alt='this generates a 404' height='1' width='1' /><br/>" + //
+            "<img src='exception?text=from-image-tag' alt='this generates an exception' height='1' width='1' /><br/>" + //
+            "<img src='sleep?s=1' alt='sleep baby sleep' height='1' width='1' /><br/>" + //
+            "\n</body>\n</html>";
 
         return html;
     }
