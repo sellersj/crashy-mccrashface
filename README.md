@@ -1,6 +1,6 @@
 # crashy-mccrashface
 
-A simple app that will use up resources and eventually crash.
+A simple app that will use up resources and eventually crash in order to make interesting monitoring graphs.
 
 The purpose is to demo the ability of the platform
 * to restart when the application crashes
