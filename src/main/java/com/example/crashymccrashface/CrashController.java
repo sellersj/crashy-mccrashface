@@ -26,30 +26,12 @@ public class CrashController {
     /** Max time we will run a cpu load. */
     private static final int MAX_LOAD_TIME_SECONDS = 6 * 60;
 
+    /**
+     * @return the thymeleaf model view name
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
     public String home() {
-        // this is a horrible way to serve html. I'm doing it anyways.
-        String html = "<!DOCTYPE html>\n<html lang='en'>\n" + //
-            "<head><title>Crashy McCrashface</title></head>\n<body>\n" + //
-            "<h1>Test app which creates interesting trackable stats</h1>" + //
-            "<a href='leak'>Fast leak</a><br/>" + //
-            "<a href='load?s=1'>Generate a load for 1 second</a><br/>" + //
-            "<a href='sleep?s=15'>Sleep the thread for 15 second</a><br/>" + //
-            "<a href='actuator'>Actuators list</a><br/>" + //
-            "<a href='exception'>Throws an error</a><br/>" + //
-            "<a href='log?num=42'>Log some messages</a><br/>" + //
-            "<p><form action='/' method='post'><input type='submit' value='Post to context root'></form><p>" + //
-            //
-            "<br/><a href='hemorrhage'>Scheduled task that will leak until crashes</a><br/>" + //
-            "<br/><a href='die'>Kill the application</a><br/>" + //
-            // these are so if someone hits the main page it will generate these stats
-            "<img src='this-image-does-not-exist.gif' alt='this generates a 404' height='1' width='1' /><br/>" + //
-            "<img src='exception?text=from-image-tag' alt='this generates an exception' height='1' width='1' /><br/>" + //
-            "<img src='sleep?s=1' alt='sleep baby sleep' height='1' width='1' /><br/>" + //
-            "\n</body>\n</html>";
-
-        return html;
+        return "home";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)

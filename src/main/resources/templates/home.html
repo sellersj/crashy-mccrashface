@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang='en' xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Crashy McCrashface</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+  <h1>Test app which creates interesting trackable stats</h1>
+  <ul>
+    <li><a href='leak'>Fast leak</a></li>
+    <li><a href='load?s=1'>Generate a load for 1 second</a></li>
+    <li><a href='sleep?s=15'>Sleep the thread for 15 second</a></li>
+    <li><a href='actuator'>Actuators list</a></li>
+    <li><a href='exception'>Throws an error</a></li>
+    <li><a href='log?num=42'>Log some messages</a></li>
+  </ul>
+  <p>
+  <form action='/' method='post'>
+    <input type='submit' value='Post to context root'>
+  </form>
+  <p>
+  <ul>
+    <li><a href='hemorrhage'>Scheduled task that will leak until crashes</a></li>
+    <li><a href='die'>Kill the application</a></li>
+    <li><img src='this-image-does-not-exist.gif' alt='this generates a 404' height='1' width='1' /></li>
+    <li><img src='exception?text=from-image-tag' alt='this generates an exception' height='1' width='1' /></li>
+    <li><img src='sleep?s=1' alt='sleep baby sleep' height='1' width='1' /></li>
+  </ul>
+</body>
+</html>
