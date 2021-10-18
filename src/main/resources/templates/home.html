@@ -18,13 +18,20 @@
   <form action='/' method='post'>
     <input type='submit' value='Post to context root'>
   </form>
-  <p>
+  <h2>How to kill this application</h2>
   <ul>
-    <li><a href='hemorrhage'>Scheduled task that will leak until crashes</a></li>
+    <li><a href='hemorrhage'>Scheduled task that will leak
+        until crashes</a></li>
     <li><a href='die'>Kill the application</a></li>
-    <li><img src='this-image-does-not-exist.gif' alt='this generates a 404' height='1' width='1' /></li>
-    <li><img src='exception?text=from-image-tag' alt='this generates an exception' height='1' width='1' /></li>
-    <li><img src='sleep?s=1' alt='sleep baby sleep' height='1' width='1' /></li>
+  </ul>
+  <h2>Image that will trigger web requests</h2>
+  <ul>
+    <li><img src='this-image-does-not-exist.gif'
+      alt='this generates a 404' height='1' width='1' /></li>
+    <li><img src='exception?text=from-image-tag'
+      alt='this generates an exception' height='1' width='1' /></li>
+    <li><img src='sleep?s=1' alt='sleep baby sleep' height='1'
+      width='1' /></li>
   </ul>
 </body>
 </html>
