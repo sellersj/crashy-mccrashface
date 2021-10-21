@@ -34,3 +34,5 @@ jobs:
       with:
         name: Package
         path: staging
+    - name: Build container image with Maven
+    - run: spring-boot:build-image -Dspring-boot.build-image.imageName=docker.io/sellersj/crashy-mccrashface:0.0.1-SNAPSHOT
