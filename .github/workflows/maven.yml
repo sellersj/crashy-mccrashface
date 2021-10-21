@@ -41,3 +41,4 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build container image with Maven
       run: mvn -DskipTests spring-boot:build-image -Dspring-boot.build-image.imageName=docker.io/sellersj/crashy-mccrashface:0.0.1-SNAPSHOT
+    - run: docker push docker.io/sellersj/crashy-mccrashface:0.0.1-SNAPSHOT
