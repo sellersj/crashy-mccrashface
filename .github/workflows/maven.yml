@@ -39,13 +39,9 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Sync readme to docker hub
-      uses: ms-jpq/sync-dockerhub-readme@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-        repository: sellersj/crashy-mccrashface
-        readme: "./README.md"
+# TODO sync the readme on docker hub with this
+# docker hub does not support tokens to change the readme
+# https://github.com/docker/hub-feedback/issues/1914#issuecomment-550402792
     - name: Build container image with Maven
       run: mvn -DskipTests spring-boot:build-image -Dspring-boot.build-image.imageName=docker.io/sellersj/crashy-mccrashface:0.0.1-SNAPSHOT
     - run: docker push docker.io/sellersj/crashy-mccrashface:0.0.1-SNAPSHOT
