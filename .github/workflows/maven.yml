@@ -48,6 +48,6 @@ jobs:
       run: mvn -DskipTests spring-boot:build-image -Dspring-boot.build-image.imageName=docker.io/${{ github.repository }}:${{ env.MVN_PROJECT_VERSION }}
     - run: docker push docker.io/${{ github.repository }}:${{ env.MVN_PROJECT_VERSION }}
     # TODO put in a test or check to make sure that this is only run on main
-    - run: docker tag docker.io/${{ github.repository }}:latest
+    - run: docker tag docker.io/${{ github.repository }}:${{ env.MVN_PROJECT_VERSION }} docker.io/${{ github.repository }}:latest
     - run: docker push docker.io/${{ github.repository }}:latest
 
