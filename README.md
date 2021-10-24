@@ -23,3 +23,14 @@ http://localhost:8080/actuator/metrics/http.server.requests?tag=status:404
 
 Note: building container images with spring boot or the native image needs a newer OS than redhat 7
 See https://github.com/buildpacks/pack/issues/439 for similar issues.
+
+## Building and Running
+
+### Building it yourself.
+You can build it yourself using the regular maven commands. See the [maven.yml](.github/workflows/maven.yml) for
+examples used for the github actions.
+
+### Container image
+You can run the image that is build by the github actions and pushed to docker hub.
+`docker run --rm -p8080:8080 sellersj/crashy-mccrashface`
+
