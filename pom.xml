@@ -24,6 +24,20 @@
     <java.version>11</java.version>
   </properties>
 
+  <scm>
+    <connection>scm:git:https://github.com/sellersj/crashy-mccrashface.git</connection>
+    <url>https://github.com/sellersj/crashy-mccrashface</url>
+    <developerConnection>scm:git:https://github.com/sellersj/crashy-mccrashface.git</developerConnection>
+  </scm>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/sellersj/crashy-mccrashface/issues</url>
+  </issueManagement>
+  <ciManagement>
+    <system>github-actions</system>
+    <url>https://github.com/sellersj/crashy-mccrashface/actions</url>
+  </ciManagement>
+
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
