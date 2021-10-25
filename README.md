@@ -52,5 +52,5 @@ https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot
 
 Set resource limits
 ```
-oc set resources deployment crashy-mccrashface --limits=cpu=200m,memory=600Mi --requests=cpu=100m,memory=400Mi
+oc set resources deployment crashy-mccrashface --limits=cpu=500m,memory=600Mi --requests=cpu=100m,memory=400Mi
 ```
