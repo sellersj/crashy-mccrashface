@@ -38,8 +38,8 @@ You can run the image that is build by the github actions and pushed to docker h
 It depends on the name of your deployment, but assuming it is called crashy-mccrashface and the actuator 
 are running on the standard port the following commands can be run.
 ```
-oc set probe deployment/crashy-mccrashface --readiness --get-url=http://localhost:8080/actuator/health/readiness --initial-delay-seconds=30 --period-seconds=5
-oc set probe deployment/crashy-mccrashface --liveness --get-url=http://localhost:8080/actuator/health/liveness --initial-delay-seconds=45 --period-seconds=5
+oc set probe deployment/crashy-mccrashface --readiness --get-url=http://localhost:8080/actuator/health/readiness --initial-delay-seconds=30 --period-seconds=5 --timeout-seconds=5
+oc set probe deployment/crashy-mccrashface --liveness --get-url=http://localhost:8080/actuator/health/liveness --initial-delay-seconds=45 --period-seconds=5 --timeout-seconds=5
 ```
 
 Can clear the probes
@@ -50,3 +50,7 @@ References
 https://www.mankier.com/1/oc-set-probe
 https://spring.io/blog/2020/03/25/liveness-and-readiness-probes-with-spring-boot
 
+Set resource limits
+```
+oc set resources deployment crashy-mccrashface --limits=cpu=200m,memory=600Mi --requests=cpu=100m,memory=400Mi
+```
