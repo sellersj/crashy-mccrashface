@@ -38,13 +38,14 @@ You can run the image that is build by the github actions and pushed to docker h
 It depends on the name of your deployment, but assuming it is called crashy-mccrashface and the actuator 
 are running on the standard port the following commands can be run.
 ```
+oc set probe deployment/crashy-mccrashface --startup --get-url=http://localhost:8080/actuator/health/readiness --initial-delay-seconds=2 --failure-threshold=60 --period-seconds=2 --timeout-seconds=2
 oc set probe deployment/crashy-mccrashface --readiness --get-url=http://localhost:8080/actuator/health/readiness --initial-delay-seconds=30 --period-seconds=5 --timeout-seconds=5
 oc set probe deployment/crashy-mccrashface --liveness --get-url=http://localhost:8080/actuator/health/liveness --initial-delay-seconds=45 --period-seconds=5 --timeout-seconds=5
 ```
 
 Can clear the probes
 ```
-oc set probe deployment/crashy-mccrashface --remove --readiness --liveness
+oc set probe deployment/crashy-mccrashface --remove --startup --readiness --liveness
 ```
 References
 https://www.mankier.com/1/oc-set-probe
