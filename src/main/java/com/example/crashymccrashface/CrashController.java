@@ -54,13 +54,13 @@ public class CrashController {
         long xmx = memoryBean.getHeapMemoryUsage().getMax();
 
         return String.format("I'm not dead yet!\n" //
-            + "Init %s and max memory %s \n" //
-            + "Memory free %s of %s total \n" //
+            + "Init %s and max memory %s MB\n" //
+            + "Memory free %s of %s total MB\n" //
             + "Percent left %.2f %%", //
-            DataSize.ofBytes(xms), //
-            DataSize.ofBytes(xmx), //
-            DataSize.ofBytes(Runtime.getRuntime().freeMemory()), //
-            DataSize.ofBytes(Runtime.getRuntime().totalMemory()), //
+            DataSize.ofBytes(xms).toMegabytes(), //
+            DataSize.ofBytes(xmx).toMegabytes(), //
+            DataSize.ofBytes(Runtime.getRuntime().freeMemory()).toMegabytes(), //
+            DataSize.ofBytes(Runtime.getRuntime().totalMemory()).toMegabytes(), //
             ((double) Runtime.getRuntime().totalMemory() / xmx) * 100.0);
     }
 
