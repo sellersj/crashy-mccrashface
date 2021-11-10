@@ -61,7 +61,7 @@ public class CrashController {
             DataSize.ofBytes(xmx).toMegabytes(), //
             DataSize.ofBytes(Runtime.getRuntime().freeMemory()).toMegabytes(), //
             DataSize.ofBytes(Runtime.getRuntime().totalMemory()).toMegabytes(), //
-            ((double) Runtime.getRuntime().totalMemory() / xmx) * 100.0);
+            (Runtime.getRuntime().totalMemory() * 100.0 / xmx));
     }
 
     @RequestMapping("/hemorrhage")
