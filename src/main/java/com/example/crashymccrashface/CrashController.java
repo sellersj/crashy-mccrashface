@@ -1,9 +1,14 @@
 package com.example.crashymccrashface;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.unit.DataSize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,13 +44,24 @@ public class CrashController {
         return "redirect:/";
     }
 
-    @RequestMapping("/leak")
+    @RequestMapping(value = "/leak", produces = { MediaType.TEXT_PLAIN_VALUE })
     @ResponseBody
     public String leak() {
         leaker.leakMemory();
 
-        return String.format("I'm not dead yet!\nMemory left: %s of %s", Runtime.getRuntime().freeMemory(),
-            Runtime.getRuntime().totalMemory());
+        MemoryMXBean memoryBean = ManagementFactory.getMemoryMXBean();
+        long xms = memoryBean.getHeapMemoryUsage().getInit();
+        long xmx = memoryBean.getHeapMemoryUsage().getMax();
+
+        return String.format("I'm not dead yet!\n" //
+            + "Init %s and max memory %s \n" //
+            + "Memory free %s of %s total \n" //
+            + "Percent left %.2f %%", //
+            DataSize.ofBytes(xms), //
+            DataSize.ofBytes(xmx), //
+            DataSize.ofBytes(Runtime.getRuntime().freeMemory()), //
+            DataSize.ofBytes(Runtime.getRuntime().totalMemory()), //
+            ((double) Runtime.getRuntime().totalMemory() / xmx) * 100.0);
     }
 
     @RequestMapping("/hemorrhage")
