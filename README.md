@@ -32,7 +32,7 @@ examples used for the github actions.
 
 ### Container image
 You can run the image that is build by the github actions and pushed to docker hub.
-`docker run --rm -p8080:8080 sellersj/crashy-mccrashface`
+`docker run --rm -p8080:8080 --cpus=".5" --memory="400m" sellersj/crashy-mccrashface`
 
 ### Liveness and Readiness Probes
 It depends on the name of your deployment, but assuming it is called crashy-mccrashface and the actuator 
@@ -55,3 +55,9 @@ Set resource limits
 ```
 oc set resources deployment crashy-mccrashface --limits=cpu=500m,memory=600Mi --requests=cpu=100m,memory=400Mi
 ```
+
+### BuildConfig and Webhooks
+If using a openshift BuildConfig to build this, when using webhooks you will need to specify the ref for the branch
+to be main. By default it will be master, but even if the webhook request is delivered correctly it will not trigger
+a build since the master branch no longer exists.
+
