@@ -43,6 +43,8 @@ oc set probe deployment/crashy-mccrashface --readiness --get-url=http://localhos
 oc set probe deployment/crashy-mccrashface --liveness --get-url=http://localhost:8080/actuator/health/liveness --initial-delay-seconds=45 --period-seconds=5 --timeout-seconds=5
 ```
 
+test
+
 Can clear the probes
 ```
 oc set probe deployment/crashy-mccrashface --remove --startup --readiness --liveness
