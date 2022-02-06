@@ -130,7 +130,7 @@
     <profile>
       <id>boot-native-image</id>
       <properties>
-        <spring-native.version>0.11.1</spring-native.version>
+        <spring-native.version>0.11.2</spring-native.version>
       </properties>
       <dependencies>
         <!-- forcing a newer version. Will need to revisit when updating the version of spring boot -->
