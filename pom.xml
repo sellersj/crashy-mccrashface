@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example</groupId>
@@ -22,6 +21,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version>
+
+    <!-- only used for making native images -->
+    <spring-native.version>0.11.3</spring-native.version>
   </properties>
 
   <scm>
@@ -68,6 +70,16 @@
     </dependency>
   </dependencies>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.experimental</groupId>
+        <artifactId>spring-native</artifactId>
+        <version>${spring-native.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -78,6 +90,16 @@
           <!-- https://stackoverflow.com/a/56218087/2055199 -->
           <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=547340 -->
           <version>3.2.2</version>
+        </plugin>
+        <plugin>
+          <groupId>com.google.cloud.tools</groupId>
+          <artifactId>jib-maven-plugin</artifactId>
+          <version>3.2.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.experimental</groupId>
+          <artifactId>spring-aot-maven-plugin</artifactId>
+          <version>${spring-native.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -116,7 +138,6 @@
           <plugin>
             <groupId>com.google.cloud.tools</groupId>
             <artifactId>jib-maven-plugin</artifactId>
-            <version>3.2.0</version>
             <configuration>
               <to>
                 <image>docker.io/sellersj/${project.artifactId}:${project.version}</image>
@@ -129,15 +150,11 @@
     <!-- this is to try out the native build image -->
     <profile>
       <id>boot-native-image</id>
-      <properties>
-        <spring-native.version>0.11.3</spring-native.version>
-      </properties>
       <dependencies>
         <!-- forcing a newer version. Will need to revisit when updating the version of spring boot -->
         <dependency>
           <groupId>org.springframework.experimental</groupId>
           <artifactId>spring-native</artifactId>
-          <version>${spring-native.version}</version>
         </dependency>
       </dependencies>
       <build>
@@ -146,7 +163,6 @@
           <plugin>
             <groupId>org.springframework.experimental</groupId>
             <artifactId>spring-aot-maven-plugin</artifactId>
-            <version>${spring-native.version}</version>
             <executions>
               <execution>
                 <id>test-generate</id>
