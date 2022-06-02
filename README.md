@@ -61,3 +61,9 @@ If using a openshift BuildConfig to build this, when using webhooks you will nee
 to be main. By default it will be master, but even if the webhook request is delivered correctly it will not trigger
 a build since the master branch no longer exists.
 
+### Building a native image
+You will need the spring release repos and plugin repos set in your settings.xml or maven proxy
+Run `mvn spring-boot:build-image -P boot-native-image`
+
+TODO check if we can run the proxy config as suggested with https://stackoverflow.com/a/70794461/2055199
+
