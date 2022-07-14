@@ -23,7 +23,7 @@
     <java.version>17</java.version>
 
     <!-- only used for making native images -->
-    <spring-native.version>0.12.0</spring-native.version>
+    <spring-native.version>0.12.1</spring-native.version>
   </properties>
 
   <scm>
