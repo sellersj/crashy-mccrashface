@@ -89,7 +89,7 @@
           <!-- there's a bug with eclipse and 3.1.2 -->
           <!-- https://stackoverflow.com/a/56218087/2055199 -->
           <!-- https://bugs.eclipse.org/bugs/show_bug.cgi?id=547340 -->
-          <version>3.2.2</version>
+          <version>3.3.0</version>
         </plugin>
         <plugin>
           <groupId>com.google.cloud.tools</groupId>
