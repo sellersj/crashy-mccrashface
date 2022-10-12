@@ -2,6 +2,7 @@ package com.example.crashymccrashface;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.unit.DataSize;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,7 +46,7 @@ public class CrashController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/leak", produces = { MediaType.TEXT_PLAIN_VALUE })
+    @RequestMapping(value = "/leak", produces = {MediaType.TEXT_PLAIN_VALUE})
     @ResponseBody
     public String leak() {
         leaker.leakMemory();
@@ -118,6 +120,19 @@ public class CrashController {
             + "I watched C-beams glitter in the dark near the Tannhäuser Gate. "
             + "All those moments will be lost in time, like tears in rain. Time to die.");
         System.exit(1);
+    }
+
+    @RequestMapping(value = "/echoHeaders", produces = MediaType.TEXT_PLAIN_VALUE)
+    @ResponseBody
+    public String listAllHeaders(@RequestHeader Map<String, String> headers) {
+
+        StringBuffer b = new StringBuffer();
+        b.append(String.format("There are %d headers\n", headers.size()));
+        headers.forEach((key, value) -> {
+            b.append(String.format("Header '%s' = %s\n", key, value));
+        });
+
+        return b.toString();
     }
 
 }
