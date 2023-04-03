@@ -24,9 +24,8 @@ public class LogGeneratorImpl implements LogGenerator {
     @Override
     public void generateLogs(int numberOfMessages) {
 
-        boolean warnOrError = random.nextBoolean();
-
         for (int i = 1; i < numberOfMessages; i++) {
+            boolean warnOrError = random.nextBoolean();
 
             String message = String.format("This is a log spike message [%s / %s]", i, numberOfMessages);
 
