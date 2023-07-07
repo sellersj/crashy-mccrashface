@@ -63,7 +63,5 @@ a build since the master branch no longer exists.
 
 ### Building a native image
 You will need the spring release repos and plugin repos set in your settings.xml or maven proxy
-Run `mvn spring-boot:build-image -P boot-native-image`
-
-TODO check if we can run the proxy config as suggested with https://stackoverflow.com/a/70794461/2055199
+Run `mvn spring-boot:build-image -P native `
 

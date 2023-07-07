@@ -23,9 +23,6 @@
     <java.version>17</java.version>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-
-    <!-- only used for making native images -->
-    <spring-native.version>0.12.1</spring-native.version>
   </properties>
 
   <scm>
@@ -135,46 +132,12 @@
     </profile>
     <!-- this is to try out the native build image -->
     <profile>
-      <id>boot-native-image</id>
-      <dependencies>
-        <!-- forcing a newer version. Will need to revisit when updating the version of spring boot -->
-        <dependency>
-          <groupId>org.springframework.experimental</groupId>
-          <artifactId>spring-native</artifactId>
-        </dependency>
-      </dependencies>
+      <id>native</id>
       <build>
         <plugins>
-          <!-- https://docs.spring.io/spring-native/docs/current/reference/htmlsingle/#spring-aot -->
           <plugin>
-            <groupId>org.springframework.experimental</groupId>
-            <artifactId>spring-aot-maven-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>test-generate</id>
-                <goals>
-                  <goal>test-generate</goal>
-                </goals>
-              </execution>
-              <execution>
-                <id>generate</id>
-                <goals>
-                  <goal>generate</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-maven-plugin</artifactId>
-            <configuration>
-              <image>
-                <!-- <builder>paketobuildpacks/builder:tiny</builder> -->
-                <env>
-                  <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-                </env>
-              </image>
-            </configuration>
+            <groupId>org.graalvm.buildtools</groupId>
+            <artifactId>native-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
