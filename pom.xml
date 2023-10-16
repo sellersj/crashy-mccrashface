@@ -74,11 +74,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.springframework.experimental</groupId>
-        <artifactId>spring-native</artifactId>
-        <version>${spring-native.version}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -89,11 +84,6 @@
           <groupId>com.google.cloud.tools</groupId>
           <artifactId>jib-maven-plugin</artifactId>
           <version>3.4.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.springframework.experimental</groupId>
-          <artifactId>spring-aot-maven-plugin</artifactId>
-          <version>${spring-native.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
