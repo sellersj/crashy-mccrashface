@@ -26,7 +26,7 @@ jobs:
       run: mvn -V --batch-mode --update-snapshots verify
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@v4.0.2
+      uses: advanced-security/maven-dependency-submission-action@v4.0.3
     # All steps after this one will have env variable `MVN_PROJECT_VERSION` passed to them.
     - run: echo "MVN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
     - run: mkdir staging && cp target/*.jar staging
