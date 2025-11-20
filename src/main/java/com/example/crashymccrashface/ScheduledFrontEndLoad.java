@@ -55,11 +55,6 @@ public class ScheduledFrontEndLoad {
             logger.debug("error in reset template");
             return false;
         }
-
-        @Override
-        public void handleError(ClientHttpResponse response) throws IOException {
-            logger.debug("error in reset template");
-        }
     }
 
 }
