@@ -30,7 +30,7 @@ jobs:
     # All steps after this one will have env variable `MVN_PROJECT_VERSION` passed to them.
     - run: echo "MVN_PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
     - run: mkdir staging && cp target/*.jar staging
-    - uses: actions/upload-artifact@v6
+    - uses: actions/upload-artifact@v7
       with:
         name: Package
         path: staging
