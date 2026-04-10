@@ -65,5 +65,3 @@ a build since the master branch no longer exists.
 You will need the spring release repos and plugin repos set in your settings.xml or maven proxy
 Run `mvn spring-boot:build-image -P native `
 
-test comment
-
