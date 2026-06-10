@@ -16,7 +16,7 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>4.1.0</version>
-    <relativePath /> <!-- lookup parent from repository -->
+    <relativePath />
   </parent>
 
   <properties>
@@ -25,9 +25,6 @@
     <java.version>25</java.version>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-    
-    <!-- TODO remove this after next spring boot update -->
-    <tomcat.version>11.0.22</tomcat.version>
   </properties>
 
   <scm>
