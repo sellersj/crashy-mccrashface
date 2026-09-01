@@ -25,6 +25,9 @@
     <java.version>25</java.version>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
+    
+    <!-- TODO remoce this when updating spring boot versions -->
+    <tomcat.version>11.0.25</tomcat.version>
   </properties>
 
   <scm>
