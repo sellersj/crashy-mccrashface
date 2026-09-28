@@ -28,6 +28,7 @@
     
     <!-- TODO remoce this when updating spring boot versions -->
     <tomcat.version>11.0.26</tomcat.version>
+    <jackson-bom.version>3.1.6</jackson-bom.version>
   </properties>
 
   <scm>
