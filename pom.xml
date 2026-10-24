@@ -15,7 +15,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.1.1</version>
+    <version>4.1.2</version>
     <relativePath />
   </parent>
 
@@ -25,10 +25,6 @@
     <java.version>25</java.version>
     <maven.compiler.showDeprecation>true</maven.compiler.showDeprecation>
     <maven.compiler.showWarnings>true</maven.compiler.showWarnings>
-    
-    <!-- TODO remoce this when updating spring boot versions -->
-    <tomcat.version>11.0.26</tomcat.version>
-    <jackson-bom.version>3.1.6</jackson-bom.version>
   </properties>
 
   <scm>
