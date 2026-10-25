@@ -49,8 +49,7 @@ jobs:
 # docker hub does not support tokens to change the readme
 # https://github.com/docker/hub-feedback/issues/1914#issuecomment-550402792
     - name: Build container image with Maven
-      # TODO we shouldn't have to set the cpu arch but it's failing if we do not
-      run: mvn -DskipTests spring-boot:build-image -Dspring-boot.build-image.imagePlatform=linux/amd64 -Dspring-boot.build-image.imageName=docker.io/${{ github.repository }}:${{ env.MVN_PROJECT_VERSION }}
+      run: mvn -DskipTests spring-boot:build-image -Dspring-boot.build-image.imageName=docker.io/${{ github.repository }}:${{ env.MVN_PROJECT_VERSION }}
     - run: docker push docker.io/${{ github.repository }}:${{ env.MVN_PROJECT_VERSION }}
     # TODO put in a test or check to make sure that this is only run on main
     - run: docker tag docker.io/${{ github.repository }}:${{ env.MVN_PROJECT_VERSION }} docker.io/${{ github.repository }}:latest
